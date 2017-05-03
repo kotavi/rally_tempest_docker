@@ -1,0 +1,15 @@
+---
+  NovaHypervisors.statistics_hypervisors:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

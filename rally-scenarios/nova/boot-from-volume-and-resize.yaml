@@ -1,0 +1,26 @@
+---
+  NovaServers.boot_server_from_volume_and_resize:
+    -
+      args:
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        to_flavor:
+            name: "{{nova_rebuild_to_flavor_name}}"
+        confirm: {{nova_confirm_resize}}
+        volume_size: {{cinder_volume_size}}
+        force_delete: {{force_delete}}
+        do_delete: {{do_delete}}
+        boot_server_kwargs: {}
+        create_volume_kwargs: {}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

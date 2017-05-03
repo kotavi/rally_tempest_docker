@@ -1,0 +1,14 @@
+---
+  NovaHosts.list_and_get_hosts:
+    -
+      runner:
+        type: "constant"
+        concurrency: {{number_of_concurrent_scenarios}}
+        times: {{iterations}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

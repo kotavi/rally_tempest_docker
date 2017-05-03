@@ -1,0 +1,71 @@
+---
+  HeatStacks.create_update_delete_stack:
+  # create-update-delete-stack-del-res
+    -
+      args:
+        template_path: "heat/templates/random-strings.yaml.template"
+        updated_template_path: "heat/templates/updated-random-strings-delete.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-update-delete-stack-increase
+    -
+      args:
+        template_path: "heat/templates/resource-group.yaml.template"
+        updated_template_path: "heat/templates/updated-resource-group-increase.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-update-delete-stack-inplace
+    -
+      args:
+        template_path: "heat/templates/autoscaling-policy.yaml.template"
+        updated_template_path: "heat/templates/updated-autoscaling-policy-inplace.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-update-delete-stack-reduce
+    -
+      args:
+        template_path: "heat/templates/resource-group.yaml.template"
+        updated_template_path: "heat/templates/updated-resource-group-reduce.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-update-delete-stack-replace
+    -
+      args:
+        template_path: "heat/templates/random-strings.yaml.template"
+        updated_template_path: "heat/templates/updated-random-strings-replace.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}

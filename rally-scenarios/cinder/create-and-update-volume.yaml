@@ -1,0 +1,20 @@
+---
+  CinderVolumes.create_and_update_volume:
+    -
+      args:
+        update_volume_kwargs:
+           display_name: "name_updated"
+           display_description: "desc_updated"
+        create_volume_kwargs:
+          volume_type: "{{volume_type}}"
+        size: {{cinder_volume_size}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

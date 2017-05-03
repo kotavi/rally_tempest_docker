@@ -1,0 +1,18 @@
+---
+  CinderVolumes.create_volume_from_snapshot:
+    -
+      args:
+          do_delete: {{do_delete}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        volumes:
+          size: {{cinder_volume_size_before_benchmarking}}
+          type: "{{volume_type}}"
+        quotas:
+          cinder: {{cinder_quotas_params}}

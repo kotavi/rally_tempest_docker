@@ -1,0 +1,16 @@
+---
+  NeutronNetworks.create_and_delete_floating_ips:
+    -
+      args:
+        floating_network: "{{neutron_floating_network}}"
+        floating_ip_args: {}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          neutron: {{neutron_quotas_params}}

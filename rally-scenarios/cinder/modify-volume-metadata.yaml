@@ -1,0 +1,17 @@
+---
+  CinderVolumes.modify_volume_metadata:
+    -
+      args: {}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        volumes:
+          size: {{cinder_volume_size_before_benchmarking}}
+          type: "{{volume_type}}"
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

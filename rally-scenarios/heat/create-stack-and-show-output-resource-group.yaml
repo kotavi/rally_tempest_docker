@@ -1,0 +1,28 @@
+---
+  HeatStacks.create_stack_and_show_output:
+    -
+      args:
+        template_path: "heat/templates/resource-group-with-outputs.yaml.template"
+        output_key: "val1"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  HeatStacks.create_stack_and_show_output_via_API:
+    -
+      args:
+        template_path: "heat/templates/resource-group-with-outputs.yaml.template"
+        output_key: "val1"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}

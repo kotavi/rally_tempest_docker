@@ -1,0 +1,24 @@
+---
+  CinderVolumes.create_and_attach_volume:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        create_volume_params:
+            volume_type: "{{volume_type}}"
+            availability_zone: "{{availability_zone}}"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

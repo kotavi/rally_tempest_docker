@@ -1,0 +1,11 @@
+---
+  KeystoneBasic.create_add_and_list_user_roles:
+    -
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}

@@ -1,0 +1,20 @@
+---
+  NovaServers.boot_server_from_volume_snapshot:
+    -
+      args:
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        volume_size: {{cinder_volume_size}}
+        volume_type: "{{volume_type}}"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

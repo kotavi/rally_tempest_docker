@@ -1,0 +1,29 @@
+---
+  NovaSecGroup.boot_and_delete_server_with_secgroups:
+    -
+      args:
+#      use in case of error "Multiple possible networks found, use a Network ID to be more specific"
+#      when used admin_floating_net_id got exception "It is not allowed to create an interface on external network"
+#      admin_internal_net - should be shared=true
+#        nics: [
+#            net-id: "{{admin_internal_net_id}}"
+#        ]
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        security_group_count: {{nova_security_group_count}}
+        rules_per_security_group: {{nova_rules_per_security_group}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        network:
+          start_cidr: "100.1.0.0/26"
+        quotas:
+          neutron: {{nova_secgroup_quota}}
+

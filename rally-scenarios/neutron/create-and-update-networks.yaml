@@ -1,0 +1,18 @@
+---
+  NeutronNetworks.create_and_update_networks:
+    -
+      args:
+        network_create_args: {}
+        network_update_args:
+            admin_state_up: False
+            name: "_updated"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          neutron: {{neutron_quotas_params}}

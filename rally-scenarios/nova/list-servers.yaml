@@ -1,0 +1,19 @@
+---
+  NovaServers.list_servers:
+    -
+      args:
+        detailed: {{nova_detailed_info}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        servers:
+          flavor:
+              name: "{{flavor_name}}"
+          image:
+              name: "{{image_name}}"
+          servers_per_tenant: {{servers_per_tenant_before_benchmarking}}

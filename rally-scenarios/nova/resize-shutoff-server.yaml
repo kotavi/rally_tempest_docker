@@ -1,0 +1,23 @@
+---
+  NovaServers.resize_shutoff_server:
+    -
+      args:
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        to_flavor:
+            name: "{{nova_rebuild_to_flavor_name}}"
+        confirm: {{nova_confirm_resize}}
+        force_delete: {{force_delete}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

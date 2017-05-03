@@ -1,0 +1,9 @@
+---
+  NovaAvailabilityZones.list_availability_zones:
+    -
+      args:
+        detailed: {{nova_detailed_info}}
+      runner:
+        type: "constant"
+        concurrency: {{number_of_concurrent_scenarios}}
+        times: {{iterations}}

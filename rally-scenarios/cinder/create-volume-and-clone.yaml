@@ -1,0 +1,19 @@
+---
+  CinderVolumes.create_volume_and_clone:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        nested_level: {{cinder_nested_cloning_level}}
+        volume_type: "{{volume_type}}"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

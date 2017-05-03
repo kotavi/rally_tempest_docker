@@ -1,0 +1,7 @@
+---
+  KeystoneBasic.get_entities:
+    -
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}

@@ -1,0 +1,18 @@
+---
+  CinderVolumes.create_and_accept_transfer:
+    -
+      args:
+        size: {{cinder_volume_size}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

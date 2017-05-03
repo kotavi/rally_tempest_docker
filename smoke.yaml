@@ -1,0 +1,104 @@
+---
+  NovaServer.boot_and_delete_server:
+    -
+      args:
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        auto_assign_nic: True
+      runner:
+        type: "constant"
+        times: {{run_N_times}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        network:
+          start_cidr: "100.1.0.0/26"
+
+  NovaServers.boot_and_list_server:
+    -
+      args:
+        auto_assign_nic: True
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        detailed: True
+      runner:
+        type: "constant"
+        times: {{run_N_times}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          neutron: {{neutron_quotas_params}}
+          nova:
+             cores: -1
+             instances: -1
+             ram: -1
+             security_group_rules: -1
+             security_groups: -1
+
+  CinderVolumes.create_and_delete_volume:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        volume_type: "{{volume_type}}"
+      runner:
+        type: "constant"
+        times: {{run_N_times}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}
+
+
+  CinderVolumes.create_and_attach_volume:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        flavor:
+            name: "{{flavor_name}}"
+        image:
+            name: "{{image_name}}"
+        create_volume_params:
+            volume_type: "{{volume_type}}"
+            availability_zone: "{{availability_zone}}"
+      runner:
+        type: "constant"
+        times: {{run_N_times}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}
+
+  CinderVolumes.create_and_list_volume:
+    -
+      args:
+        size: {{cinder_volume_size}}
+        detailed: {{cinder_detailed_info}}
+      runner:
+        type: "constant"
+        times: {{run_N_times}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

@@ -1,0 +1,67 @@
+---
+  HeatStacks.create_and_delete_stack:
+   # create-and-delete-stack-with-delay
+    -
+      args:
+        template_path: "heat/templates/resource-group-with-constraint.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-and-delete-stack-with-neutron
+    -
+      args:
+        parameters:
+          image: {{image_name}}
+          flavor: {{flavor_name}}
+          public_net: {{neutron_floating_network}}
+        template_path: "heat/templates/server-with-ports.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-and-delete-stack-with-volume
+    -
+      args:
+        template_path: "heat/templates/server-with-volume.yaml.template"
+        parameters:
+          image: {{image_name}}
+          flavor: {{flavor_name}}
+          availability_zone: {{availability_zone}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+
+  # create-and-delete-stack-resource-group
+    -
+      args:
+        template_path: "heat/templates/resource-group-server-with-volume.yaml.template"
+        parameters:
+           num_instances: {{num_instances_in_stack}}
+           instance_image: {{image_name}}
+           instance_flavor: {{flavor_name}}
+           instance_availability_zone: {{availability_zone}}
+        files: ["heat/templates/server-with-volume.yaml.template"]
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}

@@ -1,0 +1,14 @@
+{
+    "admin": {
+        "password": "admin",
+        "tenant_name": "admin",
+        "username": "admin"
+    },
+    "auth_url": "http://10.31.0.2:5000/",
+    "endpoint": null,
+    "endpoint_type": null,
+    "https_cacert": "",
+    "https_insecure": false,
+    "region_name": "RegionOne",
+    "type": "ExistingCloud"
+}

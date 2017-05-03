@@ -1,0 +1,13 @@
+---
+  HeatStacks.create_check_delete_stack:
+    -
+      args:
+        template_path: "heat/templates/random-strings.yaml.template"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}

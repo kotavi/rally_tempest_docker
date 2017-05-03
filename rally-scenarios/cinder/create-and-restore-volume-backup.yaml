@@ -1,0 +1,21 @@
+---
+  CinderVolumes.create_and_restore_volume_backup:
+    -
+      args:
+        size: {{cinder_volume_size}}
+        do_delete: {{do_delete}}
+        create_volume_kwargs:
+          volume_type: "{{volume_type}}"
+        create_backup_kwargs: {}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        roles:
+          - "Member"
+        quotas:
+          cinder: {{cinder_quotas_params}}

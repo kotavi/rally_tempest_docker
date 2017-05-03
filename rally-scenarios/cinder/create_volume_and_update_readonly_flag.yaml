@@ -1,0 +1,20 @@
+---
+  CinderVolumes.create_volume_and_update_readonly_flag:
+    -
+      args:
+        size: {{cinder_volume_size}}
+        read_only: {{cinder_read_only_volume}}
+        volume_type: "{{volume_type}}"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

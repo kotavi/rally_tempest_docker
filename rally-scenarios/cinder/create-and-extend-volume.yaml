@@ -1,0 +1,21 @@
+---
+  CinderVolumes.create_and_extend_volume:
+    -
+      args:
+        volume_type: "{{volume_type}}"
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        new_size:
+          min: {{cinder_volume_min_extend_size}}
+          max: {{cinder_volume_max_extend_size}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}

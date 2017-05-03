@@ -1,0 +1,15 @@
+---
+  NovaSecGroup.create_and_update_secgroups:
+    -
+      args:
+        security_group_count: {{nova_security_group_count}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          neutron: {{nova_secgroup_quota}}

@@ -1,0 +1,17 @@
+---
+  NovaServers.boot_and_live_migrate_server:
+  - args:
+      flavor:
+        name: "{{flavor_name}}"
+      image:
+        name: "{{image_name}}"
+      block_migration: {{block_migration}}
+      availability_zone: "{{availability_zone}}"
+    runner:
+      type: "constant"
+      times: {{iterations}}
+      concurrency: {{number_of_concurrent_scenarios}}
+    context:
+      users:
+        tenants: {{number_of_tenants}}
+        users_per_tenant: {{users_per_tenant}}

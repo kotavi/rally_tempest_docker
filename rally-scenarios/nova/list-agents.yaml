@@ -1,0 +1,7 @@
+---
+  NovaAgents.list_agents:
+    -
+      runner:
+        type: "constant"
+        concurrency: {{number_of_concurrent_scenarios}}
+        times: {{iterations}}

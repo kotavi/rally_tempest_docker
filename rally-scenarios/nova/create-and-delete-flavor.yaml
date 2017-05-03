@@ -1,0 +1,18 @@
+---
+  NovaFlavors.create_and_delete_flavor:
+    -
+      runner:
+        type: "constant"
+        concurrency: {{number_of_concurrent_scenarios}}
+        times: {{iterations}}
+      args:
+        ram: {{flavor_specification['ram']}}
+        vcpus: {{flavor_specification['vcpus']}}
+        disk: {{flavor_specification['disk']}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+      sla:
+        failure_rate:
+          max: {{sla_failure_rate_max}}

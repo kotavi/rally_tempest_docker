@@ -1,0 +1,17 @@
+---
+  SwiftObjects.list_and_download_objects_in_containers:
+    -
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        roles:
+          - "admin"
+        swift_objects:
+          containers_per_tenant: {{swift_containers_per_tenant}}
+          objects_per_container: {{swift_objects_per_container}}
+          object_size: 10240

@@ -1,0 +1,20 @@
+---
+  CinderVolumes.create_from_volume_and_delete_volume:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        volumes:
+          size: {{cinder_volume_size_before_benchmarking}}
+          type: "{{volume_type}}"
+        quotas:
+          cinder: {{cinder_quotas_params}}

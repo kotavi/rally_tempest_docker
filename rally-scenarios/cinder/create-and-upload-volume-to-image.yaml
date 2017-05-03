@@ -1,0 +1,24 @@
+---
+  CinderVolumes.create_and_upload_volume_to_image:
+    -
+      args:
+        size:
+          min: {{cinder_volume_min_size}}
+          max: {{cinder_volume_max_size}}
+        force: {{cinder_allow_upload}}
+        container_format: "bare"
+        disk_format: "raw"
+        do_delete: {{do_delete}}
+        volume_type: "{{volume_type}}"
+        image:
+          name: "{{image_name}}"
+      runner:
+        type: "constant"
+        times: {{iterations}}
+        concurrency: {{number_of_concurrent_scenarios}}
+      context:
+        users:
+          tenants: {{number_of_tenants}}
+          users_per_tenant: {{users_per_tenant}}
+        quotas:
+          cinder: {{cinder_quotas_params}}
